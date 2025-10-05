@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Weather App</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #e6f7ff;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 450px;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #005f73;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        input[type="text"] {
+            flex-grow: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background-color: #0077b6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #023e8a;
+        }
+        .weather-card {
+            background-color: #f0f8ff;
+            border-left: 5px solid #0077b6;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .weather-card h2 {
+            margin: 0 0 10px 0;
+            color: #023e8a;
+        }
+        .weather-card p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+        .weather-icon {
+            width: 100px;
+            height: 100px;
+        }
+        .error {
+            color: #d90429;
+            background-color: #ffccd5;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌤️ Simple Weather App</h1>
+        <form method="POST">
+            <input type="text" name="city" placeholder="Enter city name (e.g., Juja)" required>
+            <button type="submit">Get Weather</button>
+        </form>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        {% if data %}
+            <div class="weather-card">
+                <h2>{{ data.city }}</h2>
+                <img src="http://openweathermap.org/img/wn/{{ data.icon }}@2x.png" alt="Weather icon" class="weather-icon">
+                <p><strong>Temperature:</strong> {{ data.temperature }} °C</p>
+                <p><strong>Condition:</strong> {{ data.description }}</p>
+            </div>
+        {% endif %}
+
+    </div>
+</body>
+</html>
